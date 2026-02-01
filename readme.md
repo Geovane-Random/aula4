@@ -1,27 +1,19 @@
 # Criar o ambiente virtual
-```bash
 python3 -m venv venv
 ```
 
 # Ativar o ambiente virtual
-
-## No Windows:
-```bash
+# No Windows:
 venv\Scripts\activate
-```
-
-## No Linux/macOS:
-```bash
+# No Linux/macOS:
 source venv/bin/activate
-```
 
-### 6. Instalar Dependências Python
+6. Instalar Dependências Python
 Com o ambiente virtual ativo, instale os pacotes listados no arquivo `requirements.txt`:
-```bash
-pip install -r requirements.txt
-```
 
-### 7. Executar a Aplicação
+pip install -r requirements.txt
+
+#7. Executar a Aplicação
 Para iniciar o projeto, execute o comando:
-```bash
+bash
 streamlit run app.py
