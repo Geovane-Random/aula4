@@ -1,10 +1,17 @@
 # Criar o ambiente virtual
+```bash
 python3 -m venv venv
+```
 
 # Ativar o ambiente virtual
-# No Windows:
+
+## No Windows:
+```bash
 venv\Scripts\activate
-# No Linux/macOS:
+```
+
+## No Linux/macOS:
+```bash
 source venv/bin/activate
 ```
 
