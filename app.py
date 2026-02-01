@@ -13,9 +13,20 @@ st.set_page_config(
 # --- Carregamento dos dados ---
 @st.cache_data
 def load_data():
-    return pd.read_csv("dados-imersao-final.csv")
+    try:
+        return pd.read_csv("dados_tratados.csv")
+    except FileNotFoundError:
+        return None
 
 df = load_data()
+
+if df is None:
+    st.error("Arquivo 'dados_tratados.csv' não encontrado. Por favor, execute o script 'python etl.py' no terminal para gerar o arquivo.")
+    st.stop()
+
+if 'ano' not in df.columns:
+    st.error("Erro: As colunas esperadas não foram encontradas. Verifique se o arquivo CSV possui: ano_trabalho, nivel_experiencia, tipo_emprego, etc.")
+    st.stop()
 
 # --- Barra Lateral (Filtros) ---
 st.sidebar.header("🔍 Filtros")
@@ -124,13 +135,12 @@ with col_graf3:
 
 with col_graf4:
     if not df_filtrado.empty:
-        df_ds = df_filtrado[df_filtrado['cargo'] == 'Data Scientist']
-        media_ds_pais = df_ds.groupby('residencia_iso3')['usd'].mean().reset_index()
-        grafico_paises = px.choropleth(media_ds_pais,
+        media_paises = df_filtrado.groupby('residencia_iso3')['usd'].mean().reset_index()
+        grafico_paises = px.choropleth(media_paises,
             locations='residencia_iso3',
             color='usd',
             color_continuous_scale='rdylgn',
-            title='Salário médio de Cientista de Dados por país',
+            title='Salário médio por país (Dados Filtrados)',
             labels={'usd': 'Salário médio (USD)', 'residencia_iso3': 'País'})
         grafico_paises.update_layout(title_x=0.1)
         st.plotly_chart(grafico_paises, use_container_width=True)
