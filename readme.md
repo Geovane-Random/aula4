@@ -1,5 +1,5 @@
 # Criar o ambiente virtual
-python -m venv venv
+python3 -m venv venv
 
 # Ativar o ambiente virtual
 # No Windows:
