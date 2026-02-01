@@ -17,4 +17,4 @@ pip install -r requirements.txt
 ### 7. Executar a Aplicação
 Para iniciar o projeto, execute o comando:
 ```bash
-python main.py
+streamlit run app.py

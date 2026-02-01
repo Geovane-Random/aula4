@@ -11,7 +11,11 @@ st.set_page_config(
 )
 
 # --- Carregamento dos dados ---
-df = pd.read_csv("https://raw.githubusercontent.com/vqrca/dashboard_salarios_dados/refs/heads/main/dados-imersao-final.csv")
+@st.cache_data
+def load_data():
+    return pd.read_csv("https://raw.githubusercontent.com/vqrca/dashboard_salarios_dados/refs/heads/main/dados-imersao-final.csv")
+
+df = load_data()
 
 # --- Barra Lateral (Filtros) ---
 st.sidebar.header("🔍 Filtros")
